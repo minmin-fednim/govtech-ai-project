@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Check before you submit (made-up prototype)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="banner" role="note">
+    Made-up prototype. Not a real ICA service. All items and data are made up.
+  </div>
+
+  <main>
+    <h1>Renewing a passport? Check what you need.</h1>
+    <ol class="steps">
+      <li><strong>Pick</strong> who the passport is for.</li>
+      <li><strong>Click each row</strong> to upload that document. Read what it needs first.</li>
+      <li><strong>Check the red or green box.</strong> It tells you what is still missing.</li>
+    </ol>
+
+    <!-- 1. Who is it for -->
+    <div class="choices" role="group" aria-label="Who is the passport for?">
+      <button type="button" class="choice" data-who="myself" aria-pressed="false">Myself</button>
+      <button type="button" class="choice" data-who="child" aria-pressed="false">My child</button>
+    </div>
+
+    <!-- 2. Checklist + live status (same page, appears after choosing) -->
+    <section id="checklist" hidden aria-live="polite">
+      <p class="privacy">Use made-up sample files only. PDF, JPG or PNG, under 5 MB each (made-up limit). Files stay in your browser.</p>
+      <div id="status" class="status"></div>
+      <ul id="items" class="items"></ul>
+    </section>
+
+    <p class="note">
+      This tool gives suggestions only. ICA officers make the final decision
+      on every application.
+    </p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
