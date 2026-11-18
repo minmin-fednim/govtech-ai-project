@@ -18,6 +18,15 @@ ICA officers return 17% of 520,000 annual passport applications because of error
 ## Agent role and guardrails
 ## Roles and operating model
 ## Strategy and roadmap
+
+**Diagnosis:** Applicants do not know what a complete application looks like for their situation, so officers return 17% of applications. Parents renewing for a child are the most confused.
+
+**Guiding policy:** Check applications before they are submitted, on one page, starting with parents renewing for a child. We are not replacing officer judgement, and we are not building a dashboard yet.
+
+**Coherent actions:**
+1. A personal checklist for each situation.
+2. Plain prompts that name the item and the fix.
+3. The return rate as the one number, with an owner named before any dashboard.
 ## Metrics plan and stop line
 
 **Goal metric:** Application return rate. 17% now, below 10% in the pilot. The longer-term target is 0.5%, if evidence shows it is achievable.
@@ -30,3 +39,5 @@ ICA officers return 17% of 520,000 annual passport applications because of error
 ## Evals and gates
 ## Decision: continue, pivot or stop
 ## Open issues
+
+Not set yet: pilot size and length, officer workload baseline, days-to-complete target, and who acts on the return rate.

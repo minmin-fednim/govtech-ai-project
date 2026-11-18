@@ -40,7 +40,11 @@ Test personalised application checklists, contextual guidance and pre-submission
 
 ### Metrics
 
-- Application return rate
+- Application return rate (17% now)
+- Days added per return (about 6)
+- Share of applicants who read the guidance (38%)
+- First-try fix rate (target 9 in 10, made up)
+- Officer workload (baseline not set yet)
 
 ## Hypothesis
 
