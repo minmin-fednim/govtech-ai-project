@@ -1,6 +1,6 @@
 ## AI-UX readiness
 
-**Scenario:** A · ServiceSG enquiry response
+**Scenario:** B · ICA passport applications
 **Moment:** An officer opens an enquiry and sees a drafted first reply, with the policy pages it used.
 **Level reached:** 1 of 3
 **What we ship:** You cannot pass Level 2 yet, so ship a Level-2 UI: a reliable validator the user can check in under three seconds. A reliable validator beats a magical liar.
