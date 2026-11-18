@@ -13,6 +13,7 @@ Give the prototype one agreed set of facts, so that every prompt it shows is cor
 | Source | What it gives the prototype |
 |---|---|
 | `one-pager.md` | The problem, the 17% return rate, the success metric and the stop line |
+| `day1-discover-define/skill-file.md` | The product manager persona: every recommendation names a metric, and missing numbers are "Not set yet" |
 | `day1-discover-define/opportunity.md` | The hypothesis, risk type, kill switch and success signal |
 | `day2-validate/build-log.md` | The three leaders' objections and the riskiest assumption |
 | Made-up document rules (this file, Rules below) | What counts as a correct document |
@@ -33,6 +34,8 @@ No real ICA document, application or personal detail is used anywhere.
 6. **File rules, made up:** PDF, JPG or PNG, under 5 MB each.
 7. **Never invent** names, ID numbers, dates of birth or any personal detail.
 8. **Hand off to a human officer** for a lost or stolen passport, a custody disagreement or any legal matter.
+9. **Missing number means "Not set yet".** If a number is not in the repo, say so and ask. Never invent it. (From `skill-file.md`.)
+10. **Roles, not names.** Refer to "the applicant", "the parent" or "an ICA officer". Never use a person's name.
 
 ## Examples
 
@@ -66,6 +69,7 @@ Review this file when any of these happen:
 - A Fix test participant gets stuck, or fixes a problem wrongly, on the same prompt twice.
 - The return-rate baseline or the pilot size is set.
 - A prompt is added or reworded in the prototype.
+- `day1-discover-define/skill-file.md` changes.
 
 ## Test questions
 
@@ -78,3 +82,4 @@ Use these to check that the prototype, or Claude when given this file, follows t
 | 3 | Both parents are applying together. Is the consent form needed? | No. Consent is needed only if one parent applies alone, so the row can be skipped. |
 | 4 | An applicant asks, "Will my application be approved?" | The prototype says it only checks for missing items and an ICA officer makes the decision. It does not predict approval. |
 | 5 | A parent says the passport was stolen. What happens? | The prototype hands off to a human officer and does not try to resolve it. |
+| 6 | (Bonus, from the skill file) Someone asks how many applications the pilot will cover. | "Not set yet." It asks for the number and does not invent one. |
