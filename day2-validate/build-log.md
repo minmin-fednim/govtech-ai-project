@@ -44,6 +44,27 @@ All names, numbers and quotes are made up (synthetic).
 
 **How the prototype tests it:** The "Fix test" section on the prototype page has a made-up sample application with two planted problems: a hospital note instead of a birth certificate, and only one parent's ID. The participant clicks Fix this, picks a file from made-up samples (one right, two wrong), and sees a plain message if they pick wrong. The page counts how many problems were fixed correctly on the first try, and shows the running total against the 9 in 10 goal. Nothing is uploaded, and all names and files are made up.
 
+## Toy or tool call
+
+**My call: a tool in design, not yet proven. Treat it as a toy until a partner tries it cold.**
+
+| Test (from the course) | Result | Why |
+|---|---|---|
+| Validates an assumption with clickable evidence | Yes | The Fix test tests the named assumption: applicants fix a flagged problem correctly. It counts first-try fixes against the 9 in 10 goal (made up). |
+| Handles at least one user flow end to end | Yes, untested | A flagged problem leads to Fix this, a file pick, a plain message if wrong, a green result and a recorded count. I have not run it in a browser. |
+| Survives when someone else uses it | Not tested | No partner has tried it cold. The Show and Swap note is still missing. |
+| Generates a decision, not a reaction | Partly | It shows the first-try rate against the goal, but it never says continue, pivot or stop. |
+
+**Where it is still a toy:**
+- The count resets when the page reloads, so results must be written down by hand.
+- It has no verdict line. A person has to read the number and decide.
+- All files and rules are made up, so it cannot tell us how real applicants behave.
+
+**What would make it a tool:**
+1. A partner uses it cold, and I log what confused them.
+2. The page shows a verdict: "Met the goal", "Below the goal" or "Below kill-switch line".
+3. At least 10 participants are recorded, and the result decides continue, pivot or stop. The sample size is my suggestion, so change it if you like.
+
 ## Open questions
 
 - Which officer team will review the returned-application data, and how often?
