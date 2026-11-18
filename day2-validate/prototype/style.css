@@ -102,3 +102,28 @@ button:focus-visible, input:focus-visible { outline: 3px solid #f2a900; outline-
 .tips { padding: 0 14px 12px; font-size: 0.9rem; }
 .tips summary { cursor: pointer; color: #1f5fbf; width: max-content; }
 .tips p { margin: 6px 0 0; color: #8a1c13; }
+
+.fixtest { margin-top: 32px; padding-top: 20px; border-top: 2px dashed #c9ced6; }
+.fixtest h2 { font-size: 1.3rem; margin: 0 0 8px; }
+.ft-row { padding: 14px; }
+.ft-head { display: flex; justify-content: space-between; gap: 12px; }
+.ft-prompt { margin: 8px 0; padding: 10px; background: #fdecea; color: #8a1c13; border-radius: 6px; font-weight: 600; }
+.ft-btn {
+  width: auto;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  background: #1f5fbf;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.ft-btn:hover { background: #174a95; }
+.ft-choose { border: 1px solid #c9ced6; border-radius: 6px; padding: 10px; margin: 0; }
+.ft-choose legend { font-weight: 600; padding: 0 6px; }
+.ft-opt { display: flex; gap: 10px; align-items: center; padding: 8px 4px; cursor: pointer; }
+.ft-opt input { width: 18px; height: 18px; }
+.ft-wrong { color: #8a1c13; font-weight: 600; margin: 6px 0; }
+#fixtest-result .ft-btn { margin-top: 8px; }
+#fixtest-result p { margin: 0 0 6px; }
