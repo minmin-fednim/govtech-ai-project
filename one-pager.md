@@ -14,6 +14,20 @@ ICA officers return 17% of 520,000 annual passport applications because of error
 
 ## Experience and trust
 ## Risks (market, technical, team)
+
+**Market: will applicants use the check before they submit?**
+Only 38% read the guidance today, so applicants may skip the checklist too.
+*How we will test it:* In the Show and Swap test, count how many participants start the checklist without being told to. A low start rate means the premise is wrong, so redesign the entry point. The threshold is not set yet.
+
+**Technical: can the check flag the right problem without wrong flags?**
+The tool could flag a good file, miss a real problem (a hospital note, one parent's ID), or give wrong guidance. Wrong guidance is already a stop-line trigger.
+*How we will test it:* Run the Fix test on made-up edge cases and count wrong or missed flags. Any critical wrong guidance triggers the kill switch. The prototype keeps files in the browser, and any real version must protect sensitive data.
+
+**Team: who owns the rules and the return-rate number?**
+Rules change, and nobody is named to keep them current or to act on the return rate. Officers also must not get extra workload.
+*How we will test it:* Before any pilot, name an owner for the rules and for the return rate, and agree a review point. Ask officers whether flagged cases save or add work. The workload baseline is not set yet.
+
+**Partner's answer (what would make you trust this less?):** not collected yet
 ## Build plan and handoff
 ## Agent role and guardrails
 ## Roles and operating model
