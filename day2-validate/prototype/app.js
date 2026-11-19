@@ -11,10 +11,7 @@ var ITEMS = {
       tip: "Do not crop the edges or the lines at the bottom of the page." },
     { id: "photo", label: "A recent photo", upload: true,
       what: "Passport-style, taken in the last 3 months.",
-      tip: "No glasses or hat. Plain white background." },
-    { id: "pay", label: "Payment ready", upload: false,
-      what: "Card or e-wallet. You pay at the end.",
-      tip: "Nothing to upload. Tick when you are ready." }
+      tip: "No glasses or hat. Plain white background." }
   ],
   child: [
     { id: "old", label: "My child's current passport", upload: true,
@@ -31,10 +28,7 @@ var ITEMS = {
       tip: "If both parents apply together, skip this row." },
     { id: "photo", label: "A recent photo of my child", upload: true,
       what: "Passport-style, taken in the last 3 months.",
-      tip: "Your child alone, eyes open, plain white background." },
-    { id: "pay", label: "Payment ready", upload: false,
-      what: "Card or e-wallet. You pay at the end.",
-      tip: "Nothing to upload. Tick when you are ready." }
+      tip: "Your child alone, eyes open, plain white background." }
   ]
 };
 
@@ -44,6 +38,9 @@ var status = document.getElementById("status");
 var choices = document.querySelectorAll(".choice");
 var current = [];
 var state = {}; // id -> file name, or true for tick-only items
+var uploading = 0; // uploads still in progress
+var generation = 0; // changes when the applicant switches who the passport is for
+var UPLOAD_WAIT_MS = 600; // made-up wait
 
 function checkFile(file) {
   var ext = file.name.split(".").pop().toLowerCase();
@@ -56,6 +53,8 @@ function checkFile(file) {
 function render(who) {
   current = ITEMS[who];
   state = {};
+  generation++;
+  uploading = 0;
   list.innerHTML = "";
 
   current.forEach(function (item) {
@@ -107,16 +106,34 @@ function render(who) {
       input.accept = ".pdf,.jpg,.jpeg,.png";
       input.addEventListener("change", function () {
         if (!input.files.length) return;
-        var problem = checkFile(input.files[0]);
+        var file = input.files[0];
+        var problem = checkFile(file);
         if (problem) {
           error.textContent = problem;
           error.hidden = false;
           input.value = "";
-        } else {
-          error.hidden = true;
-          state[item.id] = input.files[0].name;
+          update();
+          return;
         }
+        // Simulated upload (made up: nothing leaves the browser).
+        error.hidden = true;
+        error.textContent = "";
+        uploading++;
+        var myGeneration = generation;
         update();
+        setTimeout(function () {
+          if (myGeneration !== generation) return; // list was reset meanwhile
+          uploading--;
+          if (document.getElementById("upload-fail").checked) {
+            // Forced failure: the page is not found. The file is NOT counted as uploaded.
+            error.textContent = "Upload failed. The page could not be found (error 404). Your file was not saved. Please try again.";
+            error.hidden = false;
+            input.value = "";
+          } else {
+            state[item.id] = file.name;
+          }
+          update();
+        }, UPLOAD_WAIT_MS);
       });
       li.appendChild(input);
       var open = function () { input.click(); };
@@ -177,12 +194,60 @@ function update() {
 
   if (missing.length === 0) {
     status.className = "status ok";
-    status.textContent = "Looks complete. Ready to submit. An ICA officer will review it.";
+    status.textContent = "Looks complete. Ready to pay. An ICA officer will review it after you pay.";
   } else {
     status.className = "status warn";
     status.textContent = missing.length + " still to do.";
   }
+  updatePay(missing.length);
 }
+
+// ---- Pay the fee (made up: no real payment) ----
+var payBtn = document.getElementById("pay-btn");
+var payHint = document.getElementById("pay-hint");
+var payMsg = document.getElementById("pay-msg");
+var payTimeout = document.getElementById("pay-timeout");
+var paying = false;
+var paid = false;
+var PAY_WAIT_MS = 1200; // made-up wait
+
+function updatePay(missingCount) {
+  if (paid) return;
+  // Rule: pay only when every document is submitted.
+  payBtn.disabled = paying || missingCount > 0;
+  payHint.textContent = missingCount > 0
+    ? "Pay is locked. " + missingCount + " row" + (missingCount === 1 ? "" : "s") + " still to do."
+    : "";
+}
+
+payBtn.addEventListener("click", function () {
+  if (paying || paid || payBtn.disabled) return;
+  // Second check: never submit unless every document is really uploaded.
+  var stillMissing = current.filter(function (item) { return !state[item.id]; }).length;
+  if (stillMissing > 0 || uploading > 0) { update(); return; }
+  paying = true;
+  payBtn.disabled = true;
+  payBtn.textContent = "Paying...";
+  payMsg.className = "";
+  payMsg.textContent = "";
+
+  setTimeout(function () {
+    paying = false;
+    if (payTimeout.checked) {
+      // Timeout: nothing is paid. Let the applicant try again.
+      payBtn.textContent = "Try payment again";
+      payMsg.className = "pay-error";
+      payMsg.textContent = "The payment timed out. You have not been charged. Please try again.";
+      update();
+    } else {
+      paid = true;
+      payBtn.textContent = "Paid";
+      payBtn.disabled = true;
+      payMsg.className = "pay-ok";
+      payMsg.textContent = "Payment received (made up). An ICA officer will review your application.";
+    }
+  }, PAY_WAIT_MS);
+});
 
 choices.forEach(function (btn) {
   btn.addEventListener("click", function () {

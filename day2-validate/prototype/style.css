@@ -127,3 +127,10 @@ button:focus-visible, input:focus-visible { outline: 3px solid #f2a900; outline-
 .ft-wrong { color: #8a1c13; font-weight: 600; margin: 6px 0; }
 #fixtest-result .ft-btn { margin-top: 8px; }
 #fixtest-result p { margin: 0 0 6px; }
+
+.pay { margin-top: 24px; padding-top: 16px; border-top: 1px solid #c9ced6; }
+.pay h2 { font-size: 1.3rem; margin: 0 0 8px; }
+.pay .ft-btn:disabled { background: #9aa3b0; cursor: not-allowed; }
+.pay-error { color: #8a1c13; font-weight: 600; margin: 10px 0; }
+.pay-ok { color: #14532d; font-weight: 600; margin: 10px 0; }
+.pay-test { display: block; margin-top: 12px; font-size: 0.9rem; color: #4a4f57; }
