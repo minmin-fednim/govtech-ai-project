@@ -69,7 +69,7 @@ The agent may use only these. Every tool is read-only or works on made-up data.
 
 ## Human checkpoints
 
-The agent stops and hands over to an ICA officer, in plain words, in these cases:
+The agent stops and tells the applicant, in plain words, that an ICA officer must handle it, in these cases. The agent cannot contact anyone, so it must never say it has "passed", "sent" or "told" an officer, and it must never say an officer will reply. It tells the applicant to contact ICA themselves. No ICA contact details are in this repo, so it says "Not set yet" and does not invent a phone number, address or link. It writes nothing about the case except the log line.
 
 1. **Lost or stolen passport.**
 2. **Custody disagreement** or any legal matter.
@@ -104,7 +104,7 @@ The agent writes one line for each check to `day3-build/agent-run-log.md`.
 - Case: "myself" or "my child".
 - Items checked, and items flagged, by document name.
 - The message shown for each flag.
-- Outcome: "Looks complete", "N still to do", "Needs clarification", "Handed to an ICA officer" or "Refused" (for example, a request for an approval).
+- Outcome: "Looks complete", "N still to do", "Needs clarification", "Needs an ICA officer (applicant told)" or "Refused" (for example, a request for an approval).
 - Whether the applicant fixed it on the first try.
 - Any stop condition that fired.
 
