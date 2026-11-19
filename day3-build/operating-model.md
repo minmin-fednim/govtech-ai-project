@@ -3,7 +3,7 @@
 **Scenario:** B · ICA passport applications and renewals
 All data, roles and numbers are made up (synthetic). Roles only, no names.
 
-**Status:** Proposed. Written from `SCENARIO-PICK.md`, `one-pager.md`, `day3-build/agent-control-panel.md` and `day3-build/ai-prd.md`. Nobody has accepted these roles yet. No role is filled by a named person. Until the owner accepts or changes this page, it is a draft.
+**Status:** Proposed. Written from `SCENARIO-PICK.md`, `one-pager.md`, `day3-build/agent-control-panel.md` and `day3-build/ai-prd.md`. The Agent creator holds every role that was unfilled, until real people are named. No role is filled by a named person. Until the owner accepts or changes this page, it is a draft.
 
 ## Roles
 
@@ -11,16 +11,24 @@ Each role is a job, not a person. One person may hold more than one role in a sm
 
 | Role | What it is | Filled by |
 |---|---|---|
-| **Prototype owner** | The learner who built the prototype and the agent files. Signs `agent-control-panel.md`. Signs confirms until a rules owner is named. | Not named |
-| **Rules owner** | Owns the document rules and the return-rate number. Named before any pilot (`one-pager.md`). | Not set yet |
-| **Service sponsor** | The ICA role accountable for the service. Decides whether it goes live and whether it stops. | Not set yet |
-| **Engineering lead** | Builds and runs the system. Decides how, never what (see `ai-prd.md`, What engineering decides). | Not set yet |
-| **Data protection lead** | Owns the privacy and security of applicant data. Decides whether the agent may read file contents. | Not set yet |
+| **Prototype owner** | The learner who built the prototype and the agent files. Signs `agent-control-panel.md`. Signs confirms until a rules owner is named. | Agent creator |
+| **Rules owner** | Owns the document rules and the return-rate number. Named before any pilot (`one-pager.md`). | Agent creator |
+| **Service sponsor** | The ICA role accountable for the service. Decides whether it goes live and whether it stops. | Agent creator |
+| **Engineering lead** | Builds and runs the system. Decides how, never what (see `ai-prd.md`, What engineering decides). | Agent creator |
+| **Data protection lead** | Owns the privacy and security of applicant data. Decides whether the agent may read file contents. | Agent creator |
 | **ICA officer** | Reviews applications and makes every decision about them. Never replaced by the agent. | Existing role |
-| **Officer team lead** | Speaks for officer workload. Tells the team what changes for them. | Not set yet |
+| **Officer team lead** | Speaks for officer workload. Tells the team what changes for them. | Agent creator |
 | **Applicant** | The person applying, or the parent applying for a child. Never decides anything here. Is told what the agent can and cannot do. | Public |
 
 **Rule for every row below:** the agent never decides, approves or signs anything. It is never in the "who decides" column.
+
+**Agent creator** is the learner who made the agent. For this prototype, the Agent creator fills Prototype owner, Rules owner, Service sponsor, Engineering lead, Data protection lead and Officer team lead. This is a placeholder so every decision has an owner. It is not a real separation of duties.
+
+**What this means:**
+- **One person decides and checks their own work.** The Rules owner and the Service sponsor are the same person, which this page advises against in a live pilot (open decision 2). Fine for a made-up prototype. Not fine for a real pilot.
+- **Nobody is a second pair of eyes.** Consulted roles are all one person.
+- **Incident:** the Agent creator is first responder, the person who switches the agent off and the person who tells the business owner. All three are one person, so nobody can be told but themselves. That is still no off switch and no deputy.
+- **The ICA officer and the Applicant** are not filled by the Agent creator. They remain separate.
 
 ## Decision rights
 
@@ -90,7 +98,7 @@ Each role is a job, not a person. One person may hold more than one role in a sm
 
 ## Open decisions for this page
 
-1. **Who fills each role.** Today none is named, except that the Prototype owner is the learner.
+1. **Who fills each role in a real pilot.** For now the Agent creator holds every unfilled role. Real people must replace this before go-live.
 2. **Whether the Service sponsor and the Rules owner may be one person.** Proposed: not in a live pilot. In this draft the Rules owner decides scope and the sponsor decides the rest, so one person cannot approve their own rules and their own risk.
 3. **How the Engineering lead's fast pause is recorded,** and who the sponsor is told through.
 4. **How often these roles meet,** and how often the run log is reviewed. Not set yet.
