@@ -31,6 +31,20 @@ Rules change, and nobody is named to keep them current or to act on the return r
 ## Build plan and handoff
 ## Agent role and guardrails
 ## Roles and operating model
+
+**Status:** Proposed. Nobody holds these roles yet. Roles only, no names. Full detail is in `day3-build/operating-model.md`.
+
+**Roles:** Prototype owner, Rules owner, Service sponsor, Engineering lead, Data protection lead, ICA officer, Officer team lead, Applicant. The agent never decides, approves or signs anything.
+
+**Who decides what:**
+- **Scope** (cases, document lists, rules): the Rules owner decides.
+- **Permissions:** the Service sponsor decides.
+- **Vendor and model:** the Service sponsor decides. Not set yet: no vendor or model is named.
+- **Go-live:** the Service sponsor decides. Not before the open decisions have an owner.
+- **Incident:** the Service sponsor decides. The Engineering lead may pause the agent first, then tell the sponsor within 1 hour (made up).
+- **Retire:** the Service sponsor decides.
+
+**Not set yet:** who fills each role, who is on duty and their deputy, how a person switches the agent off (no off switch exists), how applicants who got a wrong answer are reached, after-hours cover, and how often the run log is reviewed.
 ## Strategy and roadmap
 
 **Diagnosis:** Applicants do not know what a complete application looks like for their situation, so officers return 17% of applications. Parents renewing for a child are the most confused.
