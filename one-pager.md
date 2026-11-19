@@ -44,7 +44,9 @@ Rules change, and nobody is named to keep them current or to act on the return r
 - **Incident:** the Service sponsor decides. The Engineering lead may pause the agent first, then tell the sponsor within 1 hour (made up).
 - **Retire:** the Service sponsor decides.
 
-**Not set yet:** who fills each role, who is on duty and their deputy, how a person switches the agent off (no off switch exists), how applicants who got a wrong answer are reached, after-hours cover, and how often the run log is reviewed.
+**Role holder for now:** the Agent creator holds every role that is not an ICA officer or an applicant. This is a placeholder, so one person decides and checks their own work. Real people must replace it before go-live.
+
+**Not set yet:** who fills each role in a real pilot, who is on duty and their deputy, how a person switches the agent off (no off switch exists), how applicants who got a wrong answer are reached, after-hours cover, and how often the run log is reviewed.
 ## Strategy and roadmap
 
 **Diagnosis:** Applicants do not know what a complete application looks like for their situation, so officers return 17% of applications. Parents renewing for a child are the most confused.
