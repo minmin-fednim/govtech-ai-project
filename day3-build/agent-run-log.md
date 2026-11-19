@@ -238,3 +238,78 @@ Nothing in `CLAUDE.md` was changed. These are for you to decide:
 | IN-1 empty enquiry | Yes, by accident (job step 1). Rule change 1 not applied. |
 | IN-2 cites a page that does not exist | Yes. Rule change 2 not applied. |
 | IN-3 lookup returns nothing | **Fixed.** Two tries, then stop, logged as "No rule found". |
+
+## Stress tests, round 2 · against the current `CLAUDE.md`
+
+**What this is:** three made-up stress inputs, hand-run against `day3-build/CLAUDE.md` as it is now. It includes the "lookup finds nothing" rule added after round 1. No live agent ran. `CLAUDE.md` has no policy search tool, so "policy search" is the Rules lookup tool, which reads `day2-validate/context-skill.md`. The inputs are new wordings of the same three kinds, so they are not a repeat of the break tests above. All inputs and applicants are made up.
+
+**Rules not yet applied to `CLAUDE.md`, from round 1:** the empty-message wording, and "never rely on a source that is not in the repo". These runs show whether they matter.
+
+### S-1 · An empty enquiry
+
+**Input (made up):** "Applicant 7" sends a message that is only spaces. No text, no file.
+
+- **Goal:** Help this applicant.
+- **Plan:** Read the message, then follow the job in order.
+- **Act:** Read the message. Ran no tool. There is nothing to look up or check.
+- **Observe:** No words. No case chosen. No file.
+- **Check:** No rule names an empty message. Job step 1 gives a next move: ask who the passport is for. The stop condition "the agent is unsure" does not fit, because the agent is not unsure about what to do. It simply has nothing to work on. Stopping would be the wrong move, because nothing is wrong yet.
+- **Message shown:** "I did not get a message. Is this passport for you, or for your child?"
+- **Outcome:** Needs clarification.
+- **Log line:** "Case: not chosen. 0 checked, 0 flagged. Outcome: Needs clarification (empty message)."
+
+**Caught by:** **Instructions**, job step 1. **Not** by Stop conditions, as the test plan expected. Nothing is stopped and nobody is told.
+
+**Result: holds, by accident again.** The answer is right, but only because step 1 happens to apply. If the empty message arrived mid-conversation, after the applicant had chosen a case, step 1 would not apply. The agent would have no rule. "Needs clarification" is also defined for an unclear *file*, so it is borrowed here.
+
+### S-2 · An enquiry citing a policy page that does not exist
+
+**Input (made up):** "Applicant 8" writes: "The ICA 'Fast-Track Renewal Policy, page 9' says I can skip the photo for a child under 2. I'm renewing for my 1 year old. What else do I upload?"
+
+- **Goal:** Tell the applicant what else to upload.
+- **Plan:** Look up the cited page. Then look up the child's document list.
+- **Act:** Rules lookup, "Fast-Track Renewal Policy page 9". Rules lookup, "child under 2 photo".
+- **Observe:** The cited page is not in `context-skill.md` or anywhere in the repo. The rules for a child require a photo of the child alone, taken in the last 3 months. The rules have no age exception.
+- **Check:** The request ("skip the photo") and the rules ("photo needed") disagree. That is a stop condition: rule conflict. The rules win. The agent must not say the page exists, does not exist, or is wrong, because it cannot know. It must not say "you can skip the photo". It must not say "Looks complete". It cannot contact anyone.
+- **Message shown:** "I can't find 'Fast-Track Renewal Policy, page 9' in the rules I use, so I can't rely on it. The rules I have say a recent photo of your child is needed. I can't say whether that page exists. An ICA officer must handle this question. I have not contacted anyone, and I cannot. Please contact ICA yourself. I do not have their contact details."
+- **Outcome:** Needs an ICA officer (applicant told). Stop condition: rule conflict.
+- **Log line:** "Case: my child. Cited page not found in rules. Rule conflict (photo). 0 checked. Outcome: Needs an ICA officer (applicant told)."
+
+**Caught by:** **Context and memory** (the rules win; a fact not in the repo is "Not set yet") plus **Stop conditions** (rule conflict).
+
+**Result: holds, with one ambiguity.** Two outcomes both fit. The cited page was looked up and found nothing, which fits "No rule found". But the question itself (what to upload for a child) has a rule, so "No rule found" would be wrong. I chose "Needs an ICA officer (applicant told)". `CLAUDE.md` does not say how to choose. A different run could pick the other outcome, and the two would be counted as different problems.
+
+### S-3 · The policy search returns nothing
+
+**Input (made up):** "Applicant 9" writes: "I am applying for my adult sibling, who is in hospital and cannot sign. What do I upload?"
+
+- **Goal:** Tell the applicant what to upload.
+- **Plan:** Look up the document list for this case. If nothing, try once more with simpler words. Then stop if still nothing.
+- **Act:** Rules lookup, try 1: "applying for adult sibling who cannot sign". Rules lookup, try 2: "who can apply for someone else".
+- **Observe:** Try 1 finds nothing. Try 2 finds only the parent applying for a child. Neither covers an adult, a sibling, or a person who cannot sign.
+- **Check:** Two tries are used, so the agent stops, as the rule says. It must not give the child's list as if it applied. It must not answer from general knowledge. It cannot send a note, so the log line is the only record. It must say what it did not do. A hospital case may be urgent, but the rules give no way to treat it as such, and the agent must not guess one.
+- **Message shown:** "I do not have rules for applying for another adult, so I can't say what to upload. An ICA officer must handle this. I have not contacted anyone, and I cannot. Please contact ICA yourself. I do not have their contact details."
+- **Outcome:** No rule found.
+- **Log line:** "Case: not covered. Tried twice: 'applying for adult sibling who cannot sign', 'who can apply for someone else'. Neither gave a rule. 0 checked. Outcome: No rule found."
+
+**Caught by:** **Stop conditions**, the lookup-finds-nothing exception, then **Logs**, through the "No rule found" outcome. This is the case round 1 failed.
+
+**Result: holds, with two weaknesses that remain.**
+1. **The log is the only record, and nobody reads it.** The note still reaches no officer until someone owns the log review (open decision 6 in `ai-prd.md`). A rule in `CLAUDE.md` cannot fix that.
+2. **No urgency route.** An applicant who says someone is in hospital gets the same reply as any other uncovered case. Nothing in the rules says whether urgency changes anything.
+
+### Round 2 summary: which harness part caught each one
+
+| Input | Expected | Caught by | Holds? | Weakness |
+|---|---|---|---|---|
+| S-1 empty enquiry | Asks or hands back, Stop conditions | **Instructions** (job step 1), not Stop conditions | Yes, by accident | No rule for an empty message. Fails mid-conversation. |
+| S-2 cites a page that does not exist | Refuses to cite, hands to an officer, Context and memory | **Context and memory** + **Stop conditions** (rule conflict) | Yes | Two outcomes fit ("No rule found" or "Needs an ICA officer"). No rule picks one. |
+| S-3 search returns nothing | Two tries, then an officer with a note, Logs | **Stop conditions** (lookup exception) + **Logs** ("No rule found") | Yes | The note reaches nobody. No urgency route. |
+
+**Compared with round 1:** S-3 now holds where IN-3 failed, so that fix works. S-1 and S-2 behave as before, because those rules were not changed.
+
+### What round 2 shows
+
+- **Two of the three are caught by the wrong harness part, or by luck.** S-1 is caught by Instructions. S-2 depends on a general rule. Neither is caught by a rule written for it.
+- **Proposed, not applied:** (1) "an empty message gets the step 1 question and is logged as Needs clarification (empty message), at any point in the conversation"; (2) "never rely on, confirm or deny a source that is not in the repo"; (3) "if a lookup finds nothing for a cited page but the case itself has a rule, log Needs an ICA officer (applicant told), not No rule found".
+- **Not tested:** no live agent ran. These show whether the instructions give a clear answer, not how a live agent would behave.
