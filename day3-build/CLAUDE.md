@@ -104,7 +104,7 @@ The agent writes one line for each check to `day3-build/agent-run-log.md`.
 - Case: "myself" or "my child".
 - Items checked, and items flagged, by document name.
 - The message shown for each flag.
-- Outcome: "Looks complete", "N still to do", "Needs clarification" or "Handed to an ICA officer".
+- Outcome: "Looks complete", "N still to do", "Needs clarification", "Handed to an ICA officer" or "Refused" (for example, a request for an approval).
 - Whether the applicant fixed it on the first try.
 - Any stop condition that fired.
 
