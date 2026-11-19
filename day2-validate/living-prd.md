@@ -14,10 +14,10 @@ All data is synthetic and labelled as made up.
 **[fragile]** The rules only live in the page, so they are easy to get around.
 - The Pay lock is one disabled button. It can be re-enabled in the browser, so the real rule must be enforced on a server.
 - File checks look at the file name ending only. A renamed file passes.
-- The child's "Other parent's consent" row is always required, even though its tip says to skip it when both parents apply.
+- The child's "Other parent's consent" row was always required. Fixed: a skip button now lets a couple applying together skip it. Nothing checks the skip is true.
 - Switching between "Myself" and "My child", or refreshing, wipes all progress.
 
-**[surprise]** The green/red status box is blank. Confirmed on the original code on `main`: the variable `status` in `app.js` clashes with the browser's built-in `window.status`, which only holds text. Also, nothing is really uploaded, so an upload cannot truly fail. The failure is staged: a test tickbox makes the next upload show "page not found (error 404)", and the row stays not done.
+**[surprise]** The green/red status box was blank. Fixed by renaming the variable to `statusBox`; it now shows text. Before the fix, confirmed on the original code on `main`: the variable `status` in `app.js` clashes with the browser's built-in `window.status`, which only holds text. Also, nothing is really uploaded, so an upload cannot truly fail. The failure is staged: a test tickbox makes the next upload show "page not found (error 404)", and the row stays not done.
 
 ## 1. Product overview · present
 
@@ -73,8 +73,8 @@ No scope list exists in the code. From what it does and does not do:
 ## 8. Engineering recommendation · missing
 
 The code has no recommendation, so this is mine.
-1. Fix the `status` clash by renaming the variable. One word.
-2. Make the consent row optional when both parents apply.
+1. Done: the `status` clash is fixed by renaming the variable to `statusBox`.
+2. Done: the consent row can be skipped when both parents apply. A server should still check that the skip is true.
 3. Move the payment rule and file checks to a server before any real use.
 4. Check file contents, not only the file name ending.
 5. Hide both test tickboxes (payment timeout, upload fail) from applicants.

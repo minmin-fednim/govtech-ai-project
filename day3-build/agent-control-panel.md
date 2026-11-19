@@ -53,8 +53,8 @@ Lost or stolen passport. Custody disagreement or legal matter. An unclear file. 
 
 ## Known gaps
 
-- The prototype always requires the consent row. The rules say only when one parent applies alone.
-- The prototype's status box is blank, and its test tickboxes show to applicants.
+- Fixed: the consent row can now be skipped when both parents apply together. The skip is a button the applicant presses; nothing checks it is true.
+- Fixed: the status box was blank and now shows text. Still open: the two test tickboxes show to applicants.
 - Nobody is named to own the rules or the return rate.
 - How often a human reviews the log is not set.
 
