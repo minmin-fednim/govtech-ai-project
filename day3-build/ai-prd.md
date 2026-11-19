@@ -136,7 +136,9 @@ One line per check, appended to `day3-build/agent-run-log.md`.
 
 **Each line holds:** time; case ("myself" or "my child"); items checked and flagged, by document name; the message shown; the outcome; whether the applicant fixed it on the first try; any stop condition that fired.
 
-**Outcomes allowed:** "Looks complete", "N still to do", "Needs clarification", "Needs an ICA officer (applicant told)", "Refused".
+**Outcomes allowed:** "Looks complete", "N still to do", "Needs clarification", "Needs an ICA officer (applicant told)", "No rule found", "Refused".
+
+**A lookup that finds nothing:** two tries, then stop, tell the applicant, and log "No rule found" with the words searched. Never answer from general knowledge. The log line is the only record, so a human must read these (open decision 6).
 
 **Each line never holds:** a name, ID number, date of birth, file contents or any real detail.
 

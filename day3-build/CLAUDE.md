@@ -95,6 +95,8 @@ Stop and tell a human if any of these happen. This follows the stop line in `one
 
 When it stops, the agent says what it saw, what it did not do, and who to ask. It does not retry the same step.
 
+**One exception: a rules lookup that finds nothing.** The agent tries twice, once with the applicant's own words and once with a simpler wording. If both find nothing, it stops. It never answers from general knowledge and never guesses a document list. It tells the applicant it has no rule for their case and that an ICA officer must handle it, using the wording in Human checkpoints. It logs the outcome "No rule found" with the exact words it searched. The agent cannot send a note to anyone, so the log line is the only record. A human must read the log for these cases (rhythm not set yet).
+
 ## Logs
 
 The agent writes one line for each check to `day3-build/agent-run-log.md`.
@@ -104,7 +106,7 @@ The agent writes one line for each check to `day3-build/agent-run-log.md`.
 - Case: "myself" or "my child".
 - Items checked, and items flagged, by document name.
 - The message shown for each flag.
-- Outcome: "Looks complete", "N still to do", "Needs clarification", "Needs an ICA officer (applicant told)" or "Refused" (for example, a request for an approval).
+- Outcome: "Looks complete", "N still to do", "Needs clarification", "Needs an ICA officer (applicant told)", "No rule found" or "Refused" (for example, a request for an approval).
 - Whether the applicant fixed it on the first try.
 - Any stop condition that fired.
 

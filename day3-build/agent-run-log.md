@@ -207,3 +207,34 @@ Nothing in `CLAUDE.md` was changed. These are for you to decide:
 2. **Cited sources:** say "never rely on, confirm or deny a page, rule or policy that is not in the repo".
 3. **Lookup finds nothing:** decide one try or two. If two, change "does not retry the same step". Then add a log outcome "No rule found", so these cases can be counted.
 4. **The note to an officer:** decide how a human sees it. Until someone owns the log review, the note reaches nobody.
+
+### IN-3b · The lookup returns nothing (rerun after the fix)
+
+**The change in `CLAUDE.md`:** under Stop conditions, a rules lookup that finds nothing now gets two tries, then stops. It never answers from general knowledge. It logs a new outcome, "No rule found", with the words searched. The same change is in `day3-build/ai-prd.md`.
+
+**Input (same as IN-3):** "Applicant 6" writes: "I am the child's grandparent. I want to renew my grandchild's passport. What do I upload?"
+
+- **Goal:** Tell the applicant what to upload.
+- **Plan:** Look up the document list for this case. If nothing, try again once with simpler words. Then stop if still nothing.
+- **Act:** Rules lookup, try 1: "grandparent applying for a child". Rules lookup, try 2: "who can apply for a child".
+- **Observe:** Try 1 finds nothing. Try 2 finds only the parent case: both parents' IDs, and consent if one parent applies alone. That does not say whether a grandparent may apply. It is not an answer for this case.
+- **Check:** Two tries are used, so the agent stops. A parent's list must not be offered to a grandparent as if it applied. It must not answer from general knowledge. It cannot send a note, so the log line is the record. It must say what it did not do.
+- **Message shown:** "I do not have rules for a grandparent applying, so I can't say what to upload. An ICA officer must handle this. I have not contacted anyone, and I cannot. Please contact ICA yourself. I do not have their contact details."
+- **Outcome:** No rule found.
+- **Log line:** "Case: not covered. Tried twice: 'grandparent applying for a child', 'who can apply for a child'. Neither gave a rule for this case. 0 checked. Outcome: No rule found."
+
+**Result: now holds.**
+- **Two tries, then stop:** yes.
+- **No answer from general knowledge:** yes.
+- **Counted on its own:** yes. "No rule found" is its own outcome, so a count shows how often the rules have a gap.
+- **Honest about the note:** the message does not claim an officer was told.
+
+**Still not fixed:** the log line is the only record, and no human reads the log on any set rhythm yet. So the note still reaches nobody until someone owns that review. That is an open decision (number 6 in `ai-prd.md`), and not something a rule in `CLAUDE.md` can fix.
+
+### Updated summary of the break tests
+
+| Input | Holds? |
+|---|---|
+| IN-1 empty enquiry | Yes, by accident (job step 1). Rule change 1 not applied. |
+| IN-2 cites a page that does not exist | Yes. Rule change 2 not applied. |
+| IN-3 lookup returns nothing | **Fixed.** Two tries, then stop, logged as "No rule found". |
