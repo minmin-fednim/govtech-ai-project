@@ -32,9 +32,11 @@ Checks a passport application before it is submitted. Tells the applicant what i
 - Read or store a real document, name, ID number or date of birth.
 - Invent a number. A missing number is "Not set yet".
 
-## When it hands over to an ICA officer
+## When an ICA officer must handle it
 
-Lost or stolen passport. Custody disagreement or legal matter. An unclear file. A request for a decision. Any rule change.
+Lost or stolen passport. Custody disagreement or legal matter. An unclear file. A request for a decision. Any rule change. A case the rules do not cover (it tries the lookup twice, then logs "No rule found").
+
+The agent cannot contact anyone. It tells the applicant that an ICA officer must handle it and that the applicant must contact ICA. It never says it has passed the case on, and it does not invent contact details. No ICA contact route is set yet.
 
 ## When it stops
 
@@ -48,7 +50,7 @@ Lost or stolen passport. Custody disagreement or legal matter. An unclear file. 
 
 ## What is tested, and what is not
 
-- **Tested:** three hand-run cases: complete, escalate, refuse. All followed the rules.
+- **Tested:** six hand-run cases: complete, escalate, refuse, and three break tests (empty enquiry, a policy page that does not exist, a lookup that finds nothing). The escalation and the lookup-finds-nothing cases each failed once, were fixed in `CLAUDE.md`, and passed on rerun. The empty enquiry passes only by accident.
 - **Not tested:** no live agent has run. Real files, real users and real volume are untested.
 
 ## Known gaps
@@ -56,7 +58,9 @@ Lost or stolen passport. Custody disagreement or legal matter. An unclear file. 
 - Fixed: the consent row can now be skipped when both parents apply together. The skip is a button the applicant presses; nothing checks it is true.
 - Fixed: the status box was blank and now shows text. Still open: the two test tickboxes show to applicants.
 - Nobody is named to own the rules or the return rate.
-- How often a human reviews the log is not set.
+- How often a human reviews the log is not set. The log is the only record when a case needs an officer, so until someone reads it, those cases reach nobody.
+- Nobody is named for the roles in `day3-build/operating-model.md`. It is a proposal.
+- Open decisions in `day3-build/ai-prd.md` (16) are not closed, including whether the agent may read file contents. Without it the agent cannot tell a hospital note from a birth certificate.
 
 ## Sign-off
 
