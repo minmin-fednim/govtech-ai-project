@@ -28,8 +28,22 @@
     <!-- 2. Checklist + live status (same page, appears after choosing) -->
     <section id="checklist" hidden aria-live="polite">
       <p class="privacy">Use made-up sample files only. PDF, JPG or PNG, under 5 MB each (made-up limit). Files stay in your browser.</p>
+      <label class="pay-test">
+        <input type="checkbox" id="upload-fail"> For testing: make the next upload fail (page not found)
+      </label>
       <div id="status" class="status"></div>
       <ul id="items" class="items"></ul>
+
+      <div id="pay" class="pay">
+        <h2>Pay the fee</h2>
+        <p class="privacy">Made-up fee: $99. No real payment is taken. You can pay only after every row above is done.</p>
+        <button type="button" id="pay-btn" class="ft-btn" disabled>Pay $99 (made up)</button>
+        <p id="pay-hint" class="privacy"></p>
+        <p id="pay-msg" role="alert" aria-live="assertive"></p>
+        <label class="pay-test">
+          <input type="checkbox" id="pay-timeout"> For testing: make the payment time out
+        </label>
+      </div>
     </section>
 
     <section id="fixtest" class="fixtest" aria-labelledby="fixtest-h">
