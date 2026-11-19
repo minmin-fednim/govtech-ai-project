@@ -23,7 +23,7 @@ var ITEMS = {
     { id: "ids", label: "Both parents' IDs", upload: true,
       what: "Front and back of each parent's ID.",
       tip: "Parents often upload only one parent's ID. Both are needed." },
-    { id: "consent", label: "Other parent's consent", upload: true,
+    { id: "consent", label: "Other parent's consent", upload: true, skippable: true,
       what: "A signed form, if only one parent is applying.",
       tip: "If both parents apply together, skip this row." },
     { id: "photo", label: "A recent photo of my child", upload: true,
@@ -34,10 +34,11 @@ var ITEMS = {
 
 var section = document.getElementById("checklist");
 var list = document.getElementById("items");
-var status = document.getElementById("status");
+var statusBox = document.getElementById("status"); // not named "status": that clashes with window.status
 var choices = document.querySelectorAll(".choice");
 var current = [];
 var state = {}; // id -> file name, or true for tick-only items
+var SKIPPED = "skipped"; // marker: the applicant said both parents apply together
 var uploading = 0; // uploads still in progress
 var generation = 0; // changes when the applicant switches who the passport is for
 var UPLOAD_WAIT_MS = 600; // made-up wait
@@ -98,6 +99,19 @@ function render(who) {
     tips.appendChild(summary);
     tips.appendChild(tipText);
     li.appendChild(tips);
+
+    if (item.skippable) {
+      var skip = document.createElement("button");
+      skip.type = "button";
+      skip.className = "skip";
+      skip.textContent = "Both parents are applying together: skip this row";
+      skip.addEventListener("click", function () {
+        state[item.id] = SKIPPED;
+        error.hidden = true;
+        update();
+      });
+      li.appendChild(skip);
+    }
 
     if (item.upload) {
       var input = document.createElement("input");
@@ -168,7 +182,25 @@ function update() {
     li.classList.toggle("done", !!value);
     action.textContent = "";
 
-    if (value && item.upload) {
+    var skipBtn = li.querySelector(".skip");
+    if (skipBtn) skipBtn.hidden = !!value;
+
+    if (value === SKIPPED) {
+      var skipped = document.createElement("span");
+      skipped.className = "filename";
+      skipped.textContent = "✓ Skipped";
+      var undo = document.createElement("button");
+      undo.type = "button";
+      undo.className = "remove";
+      undo.textContent = "Undo";
+      undo.addEventListener("click", function (e) {
+        e.stopPropagation();
+        delete state[item.id];
+        update();
+      });
+      action.appendChild(skipped);
+      action.appendChild(undo);
+    } else if (value && item.upload) {
       var name = document.createElement("span");
       name.className = "filename";
       name.textContent = "✓ " + value;
@@ -193,11 +225,11 @@ function update() {
   });
 
   if (missing.length === 0) {
-    status.className = "status ok";
-    status.textContent = "Looks complete. Ready to pay. An ICA officer will review it after you pay.";
+    statusBox.className = "status ok";
+    statusBox.textContent = "Looks complete. Ready to pay. An ICA officer will review it after you pay.";
   } else {
-    status.className = "status warn";
-    status.textContent = missing.length + " still to do.";
+    statusBox.className = "status warn";
+    statusBox.textContent = missing.length + " still to do.";
   }
   updatePay(missing.length);
 }

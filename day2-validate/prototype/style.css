@@ -134,3 +134,6 @@ button:focus-visible, input:focus-visible { outline: 3px solid #f2a900; outline-
 .pay-error { color: #8a1c13; font-weight: 600; margin: 10px 0; }
 .pay-ok { color: #14532d; font-weight: 600; margin: 10px 0; }
 .pay-test { display: block; margin-top: 12px; font-size: 0.9rem; color: #4a4f57; }
+
+.skip { margin: 0 14px 12px; padding: 6px 10px; font: inherit; font-size: 0.9rem; color: #1f5fbf; background: transparent; border: 1px solid #1f5fbf; border-radius: 6px; cursor: pointer; }
+.skip:hover { background: #eef4fd; }

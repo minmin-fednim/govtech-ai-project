@@ -45,7 +45,7 @@ All data is synthetic and labelled as made up.
   - The failure is staged. A tickbox causes it, not a real network error. A real upload would need a server.
   - The page never really shows a "page not found" screen. It only shows the message.
   - The test tickboxes are visible to applicants and must be hidden before real use.
-  - The blank status box and the always-required consent row are still not fixed.
+  - The blank status box and the always-required consent row were fixed later: the variable was renamed to `statusBox`, and the consent row now has a skip button for couples applying together.
 
 ## 3. Refine
 
