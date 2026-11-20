@@ -22,7 +22,7 @@ All data, files, names and numbers are made up (synthetic). They are not ICA's r
 The agent checks an application before it is submitted and tells the applicant what is missing or wrong. It suggests only. The full agent file is `day3-build/CLAUDE.md`. If the two ever disagree, the rules in Business rules below win, and the disagreement is reported as an open decision.
 
 **The job, in order:**
-1. Ask who the passport is for: the applicant or their child.
+1. Ask who the passport is for: the applicant or their child. For a child, also ask whether one parent is applying alone or both parents are applying together. Count the other parent's consent form as "still to do" only when one parent applies alone. Until the applicant answers, count the other four documents and say the consent form depends on the answer. Never give a range.
 2. Show the document list for that case, with one short line on what each needs.
 3. Check each file added.
 4. For each problem, name the item, say what is wrong, then say what to do.
