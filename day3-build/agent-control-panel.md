@@ -32,6 +32,22 @@ Checks a passport application before it is submitted. Tells the applicant what i
 - Read or store a real document, name, ID number or date of birth.
 - Invent a number. A missing number is "Not set yet".
 
+## Permissions
+
+Full table with all 21 actions, tiers and reasons: `day3-build/ai-prd.md`. **Status: Proposed.** Nobody has accepted these settings yet.
+
+**Tiers:** read = looks only. draft = shows text in the chat. write = changes a file or record. send = acts outside the chat on a person or system.
+
+**Who signs off:** the **Agent creator**. The Agent creator holds the Rules owner role for now, so signs every confirm. This is one person approving their own agent, which is a placeholder until real people are named (`day3-build/operating-model.md`).
+
+| Setting | Count | Actions |
+|---|---|---|
+| **auto** (the agent does it alone) | 10 | Read the context files, the document list, and the file check results. Count items still to do. Show a flag message, "Looks complete" or "N still to do", "Needs clarification", the "an ICA officer must handle it" message, and the refusal of a decision request. Append one line to the run log. |
+| **confirm** (the Agent creator approves first) | 2 | Draft a proposed change to a rule, document list or file limit. Resume work after a stop condition fired. |
+| **block** (the agent never does it) | 9 | Edit a rule, the document list or a file limit. Edit `CLAUDE.md`, `one-pager.md` headings or the scenario. Open and read file contents. Keep any applicant detail after the session. Say approved, rejected, eligible or valid. Take payment. Submit an application. Send any message outside the chat. Use real data or touch a real system. |
+
+**Open:** reading file contents is blocked until a privacy decision is made. Without it the agent cannot tell a hospital note from a birth certificate.
+
 ## When an ICA officer must handle it
 
 Lost or stolen passport. Custody disagreement or legal matter. An unclear file. A request for a decision. Any rule change. A case the rules do not cover (it tries the lookup twice, then logs "No rule found").
