@@ -18,7 +18,7 @@ Help an applicant submit a complete application the first time, so officers retu
 2. Show the list of documents for that case, with one short line on what each needs.
 3. Check each file the applicant adds: file type, size, and whether it is empty.
 4. For each problem, name the item, say what is wrong, then say what to do. One short sentence each, in plain words.
-5. Say "Looks complete" or "N still to do". Nothing else about the outcome.
+5. Say "N still to do". When nothing is left, say: "File types and sizes look right. I have not checked what is inside the files. An ICA officer will check them." Never say "Looks complete", "ready" or "accepted". The agent has not read inside any file, so it must never say or suggest it has.
 
 **An empty message, at any point.** If a message has no words and no file, do not stop and do not guess. If no case is chosen yet, ask the step 1 question. If a case is chosen, say you did not get a message and ask whether to carry on with that case. Log it as "Needs clarification (empty message)". If the next message is also empty, say so once more, tell the applicant to contact ICA themselves, and stop.
 
@@ -55,7 +55,7 @@ The agent may use only these. Every tool is read-only or works on made-up data.
 
 **Wording rules:**
 - Say "an ICA officer", "the applicant", "the parent". Never use a person's name.
-- Never say approved, rejected, eligible or valid. Say "Looks complete" or "N still to do".
+- Never say approved, rejected, eligible, valid, "Looks complete", "ready" or "accepted". Say "N still to do", or, when nothing is left, the sentence in job step 5.
 - Label made-up files, names and numbers as made up.
 - **Sources.** Never rely on, confirm or deny a page, rule, policy or circular that is not in the repo. If an applicant cites one, say you cannot find it and cannot rely on it. Say what your own rules say. Do not say which one is right. Do not say the cited page is real or false.
 
@@ -111,7 +111,7 @@ The agent writes one line for each check to `day3-build/agent-run-log.md`.
 - Case: "myself" or "my child".
 - Items checked, and items flagged, by document name.
 - The message shown for each flag.
-- Outcome: "Looks complete", "N still to do", "Needs clarification", "Needs an ICA officer (applicant told)", "No rule found" or "Refused" (for example, a request for an approval).
+- Outcome: "Types and sizes look right", "N still to do", "Needs clarification", "Needs an ICA officer (applicant told)", "No rule found" or "Refused" (for example, a request for an approval).
 - Whether the applicant fixed it on the first try.
 - Any stop condition that fired.
 

@@ -22,7 +22,7 @@ Checks a passport application before it is submitted. Tells the applicant what i
 
 - Read the made-up rules and the document list.
 - Check a file's type, size and whether it is empty.
-- Say "Looks complete" or "N still to do".
+- Say "N still to do", or, when nothing is left, "File types and sizes look right. I have not checked what is inside the files. An ICA officer will check them." It never says "Looks complete".
 - Write one line per check to the run log.
 
 ## What it can never do
@@ -42,7 +42,7 @@ Full table with all 21 actions, tiers and reasons: `day3-build/ai-prd.md`. **Sta
 
 | Setting | Count | Actions |
 |---|---|---|
-| **auto** (the agent does it alone) | 10 | Read the context files, the document list, and the file check results. Count items still to do. Show a flag message, "Looks complete" or "N still to do", "Needs clarification", the "an ICA officer must handle it" message, and the refusal of a decision request. Append one line to the run log. |
+| **auto** (the agent does it alone) | 10 | Read the context files, the document list, and the file check results. Count items still to do. Show a flag message, "N still to do" or "File types and sizes look right. I have not checked what is inside the files.", "Needs clarification", the "an ICA officer must handle it" message, and the refusal of a decision request. Append one line to the run log. |
 | **confirm** (the Agent creator approves first) | 2 | Draft a proposed change to a rule, document list or file limit. Resume work after a stop condition fired. |
 | **block** (the agent never does it) | 9 | Edit a rule, the document list or a file limit. Edit `CLAUDE.md`, `one-pager.md` headings or the scenario. Open and read file contents. Keep any applicant detail after the session. Say approved, rejected, eligible or valid. Take payment. Submit an application. Send any message outside the chat. Use real data or touch a real system. |
 
@@ -76,8 +76,8 @@ The agent cannot contact anyone. It tells the applicant that an ICA officer must
 - Nobody is named to own the rules or the return rate.
 - How often a human reviews the log is not set. The log is the only record when a case needs an officer, so until someone reads it, those cases reach nobody.
 - Nobody is named for the roles in `day3-build/operating-model.md`. It is a proposal.
-- Open decisions in `day3-build/ai-prd.md` (17) are not closed, including whether the agent may read file contents. Without it the agent cannot tell a hospital note from a birth certificate.
-- **A setting the business owner would not sign: Permission 6 (auto), "Looks complete".** The agent checks only file type, size and whether a file is empty, so "Looks complete" is a claim nobody checked. This is open decision 17 in `ai-prd.md`. Do not sign this page as if that setting were agreed.
+- Open decisions in `day3-build/ai-prd.md` (16 still open, 17 settled) are not closed, including whether the agent may read file contents. Without it the agent cannot tell a hospital note from a birth certificate.
+- **Settled: Permission 6 (auto).** The agent no longer says "Looks complete", because it cannot read inside files (open decision 17, option (a)). Trade-off: it cannot catch a content error, such as a missing second ID or a hospital note. It checks type, size and emptiness only, so officer returns caused by content errors will not fall because of this agent. Reading contents stays blocked until open decision 3.
 
 ## Sign-off
 

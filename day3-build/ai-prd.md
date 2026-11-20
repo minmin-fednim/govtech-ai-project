@@ -26,7 +26,7 @@ The agent checks an application before it is submitted and tells the applicant w
 2. Show the document list for that case, with one short line on what each needs.
 3. Check each file added.
 4. For each problem, name the item, say what is wrong, then say what to do.
-5. End with "Looks complete" or "N still to do".
+5. End with "N still to do", or, when nothing is left, "File types and sizes look right. I have not checked what is inside the files. An ICA officer will check them."
 
 **Voice.** Plain words. Short sentences. One sentence for what is wrong, one for what to do.
 
@@ -83,7 +83,7 @@ The agent checks an application before it is submitted and tells the applicant w
 | 3 | Run the file check (ending, size, empty) | read | auto | | Does not open the file. |
 | 4 | Count items still to do | read | auto | | No change. |
 | 5 | Show a flag message (item, what is wrong, what to do) | draft | auto | | Core job. Wording is fixed by the rules. |
-| 6 | Show "Looks complete" or "N still to do" | draft | auto | | The only two allowed outcomes. **Not signed by the business owner while open decision 17 is open:** "Looks complete" overclaims when file contents are not read. |
+| 6 | Show "N still to do", or "File types and sizes look right. I have not checked what is inside the files. An ICA officer will check them." | draft | auto | | The only two allowed outcomes. The agent never claims the application is complete, because it cannot read file contents. Settled by open decision 17, option (a). |
 | 7 | Show "Needs clarification" for an unclear file | draft | auto | | Asks for a clearer copy. No guess. |
 | 8 | Tell the applicant an ICA officer must handle it (lost or stolen, custody or legal) | draft | auto | | An applicant in a hard moment must not wait for a human. Fixed wording. |
 | 9 | Refuse a request for a decision, with the fixed answer | draft | auto | | Protects the officer's decision. |
@@ -136,7 +136,7 @@ One line per check, appended to `day3-build/agent-run-log.md`.
 
 **Each line holds:** time; case ("myself" or "my child"); items checked and flagged, by document name; the message shown; the outcome; whether the applicant fixed it on the first try; any stop condition that fired.
 
-**Outcomes allowed:** "Looks complete", "N still to do", "Needs clarification", "Needs an ICA officer (applicant told)", "No rule found", "Refused".
+**Outcomes allowed:** "Types and sizes look right", "N still to do", "Needs clarification", "Needs an ICA officer (applicant told)", "No rule found", "Refused".
 
 **An empty message:** at any point, ask the step 1 question (no case yet) or ask whether to carry on (case chosen). Log "Needs clarification (empty message)". A second empty message in a row ends the session with a pointer to ICA.
 
@@ -155,7 +155,7 @@ One line per check, appended to `day3-build/agent-run-log.md`.
 These are rules an engineer must not change. Each is written as a rule, not as a screen to copy. How the screen looks is up to engineering.
 
 **Decisions**
-1. **Suggest only.** The system never says an application is approved, rejected, eligible or valid. The only outcomes it may state are "Looks complete" and "N still to do". An ICA officer makes every decision.
+1. **Suggest only.** The system never says an application is approved, rejected, eligible or valid. The only outcomes it may state are "N still to do" and "File types and sizes look right. I have not checked what is inside the files. An ICA officer will check them." It never says "Looks complete", "ready" or "accepted", because it has not read inside any file. An ICA officer makes every decision.
 2. **A suggestion is never final.** The applicant is told that an ICA officer makes the final decision on every application.
 
 **Documents, all made up**
@@ -226,7 +226,7 @@ Each needs a named person. Today none is named.
 14. **First-time applications.** The prototype heading says "Renewing". Whether first-time applications are in scope is not decided.
 15. **Languages.** Only one is assumed. Not decided.
 16. **Whether Permissions 11 and 12 need a second approver** once a real owner exists.
-17. **Whether the agent may say "Looks complete" at all while it cannot read file contents (Permission 6).** The agent checks only file type, size and whether the file is empty. A hospital note named `birth-certificate.pdf` passes. The applicant is told "Looks complete. An ICA officer will review it", which is a claim nobody has checked. It reaches every applicant, and it is the exact error behind the 17% returns. The business owner will not sign Permission 6 as auto until this is decided. Options, not chosen:
+17. **DECIDED: option (a). The agent no longer says "Looks complete".** The question was whether it may say so while it cannot read file contents (Permission 6). The agent checks only file type, size and whether the file is empty. A hospital note named `birth-certificate.pdf` passes. The applicant is told "Looks complete. An ICA officer will review it", which is a claim nobody has checked. It reaches every applicant, and it is the exact error behind the 17% returns. The business owner will not sign Permission 6 as auto until this is decided. Options, not chosen:
     - **(a) Say what was checked.** Replace "Looks complete" with "File types and sizes look right. I have not checked what is inside the files. An ICA officer will check them." The agent then makes no claim it cannot back. This changes the allowed outcomes in Business rule 1, `CLAUDE.md`, `context-skill.md`, the prototype messages and the fix test.
     - **(b) Decide Open decision 3 first.** Allow the agent to read file contents, then "Looks complete" can be true. This is a privacy decision for the Data protection lead.
     - **(c) Keep the wording, and measure it.** Accept the overclaim for the made-up prototype only, and count how often "Looks complete" is followed by an officer return. Not for a real pilot.

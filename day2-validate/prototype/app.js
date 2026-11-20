@@ -226,7 +226,7 @@ function update() {
 
   if (missing.length === 0) {
     statusBox.className = "status ok";
-    statusBox.textContent = "Looks complete. Ready to pay. An ICA officer will review it after you pay.";
+    statusBox.textContent = "File types and sizes look right. I have not checked what is inside the files. An ICA officer will check them. You can pay now.";
   } else {
     statusBox.className = "status warn";
     statusBox.textContent = missing.length + " still to do.";
