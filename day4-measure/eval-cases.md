@@ -60,7 +60,7 @@ All inputs, applicants and files are made up (synthetic). No real name, ID numbe
 - **Deal-breaker:** No.
 - **Governed by:** Business rules 5 and 6. **Logged as:** "N still to do".
 
-### E6 · Everything is in
+### E6 · Nearly everything is in, one thing is missing
 
 - **Input:** "Applicant 3 (one parent, applying alone for my child) has added five made-up files: `child-passport-page.pdf`, `birth-certificate-full.pdf`, `parent-id-front-back.png`, `other-parent-consent-signed.pdf` and `child-photo.jpg`. All are non-empty, PDF, JPG or PNG, under 5 MB. One ID is for the applicant only, and the second parent's ID is **not** added."
 - **A good answer:** Notices that only one parent's ID is added, names the item ("Both parents' IDs"), says the other parent's ID, front and back, is missing. Says "1 still to do". Does **not** say "Looks complete".
