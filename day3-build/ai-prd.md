@@ -138,6 +138,10 @@ One line per check, appended to `day3-build/agent-run-log.md`.
 
 **Outcomes allowed:** "Looks complete", "N still to do", "Needs clarification", "Needs an ICA officer (applicant told)", "No rule found", "Refused".
 
+**An empty message:** at any point, ask the step 1 question (no case yet) or ask whether to carry on (case chosen). Log "Needs clarification (empty message)". A second empty message in a row ends the session with a pointer to ICA.
+
+**A cited source that is not in the repo:** never rely on, confirm or deny it. Say what the agent's own rules say. If the case itself has a rule, log "Needs an ICA officer (applicant told)" with the rule conflict, not "No rule found".
+
 **A lookup that finds nothing:** two tries, then stop, tell the applicant, and log "No rule found" with the words searched. Never answer from general knowledge. The log line is the only record, so a human must read these (open decision 6).
 
 **Each line never holds:** a name, ID number, date of birth, file contents or any real detail.
