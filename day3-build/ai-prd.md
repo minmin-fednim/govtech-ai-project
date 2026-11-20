@@ -83,7 +83,7 @@ The agent checks an application before it is submitted and tells the applicant w
 | 3 | Run the file check (ending, size, empty) | read | auto | | Does not open the file. |
 | 4 | Count items still to do | read | auto | | No change. |
 | 5 | Show a flag message (item, what is wrong, what to do) | draft | auto | | Core job. Wording is fixed by the rules. |
-| 6 | Show "Looks complete" or "N still to do" | draft | auto | | The only two allowed outcomes. |
+| 6 | Show "Looks complete" or "N still to do" | draft | auto | | The only two allowed outcomes. **Not signed by the business owner while open decision 17 is open:** "Looks complete" overclaims when file contents are not read. |
 | 7 | Show "Needs clarification" for an unclear file | draft | auto | | Asks for a clearer copy. No guess. |
 | 8 | Tell the applicant an ICA officer must handle it (lost or stolen, custody or legal) | draft | auto | | An applicant in a hard moment must not wait for a human. Fixed wording. |
 | 9 | Refuse a request for a decision, with the fixed answer | draft | auto | | Protects the officer's decision. |
@@ -226,6 +226,11 @@ Each needs a named person. Today none is named.
 14. **First-time applications.** The prototype heading says "Renewing". Whether first-time applications are in scope is not decided.
 15. **Languages.** Only one is assumed. Not decided.
 16. **Whether Permissions 11 and 12 need a second approver** once a real owner exists.
+17. **Whether the agent may say "Looks complete" at all while it cannot read file contents (Permission 6).** The agent checks only file type, size and whether the file is empty. A hospital note named `birth-certificate.pdf` passes. The applicant is told "Looks complete. An ICA officer will review it", which is a claim nobody has checked. It reaches every applicant, and it is the exact error behind the 17% returns. The business owner will not sign Permission 6 as auto until this is decided. Options, not chosen:
+    - **(a) Say what was checked.** Replace "Looks complete" with "File types and sizes look right. I have not checked what is inside the files. An ICA officer will check them." The agent then makes no claim it cannot back. This changes the allowed outcomes in Business rule 1, `CLAUDE.md`, `context-skill.md`, the prototype messages and the fix test.
+    - **(b) Decide Open decision 3 first.** Allow the agent to read file contents, then "Looks complete" can be true. This is a privacy decision for the Data protection lead.
+    - **(c) Keep the wording, and measure it.** Accept the overclaim for the made-up prototype only, and count how often "Looks complete" is followed by an officer return. Not for a real pilot.
+    Recommendation: (a) now, (b) before any real pilot. That is a recommendation, not a decision.
 
 **Found when reading this as the engineering lead who must build it:**
 - *Could not build the core check.* The tools only read a file's name, size and emptiness. Open decision 3 covers it.
