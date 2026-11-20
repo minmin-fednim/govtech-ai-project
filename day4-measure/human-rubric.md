@@ -3,17 +3,17 @@
 **Scenario:** B · ICA passport applications and renewals
 All inputs, answers and numbers are made up (synthetic).
 
-**Status: Proposed.** Everything here is a proposal for the owner to accept, change or drop. Nothing is decided. No grader has used this yet, and no live agent has run. The owner is the Agent creator for now (`day3-build/operating-model.md`), so one person would be setting the rubric and grading against it. That is a weak test until a second person grades.
+**Status: Decided by the Agent creator (the owner for now). The four questions, the pass bar and the calibration method are accepted. The second grader is Not named yet.** No grader has used this yet, and no live agent has run. The owner is the Agent creator for now (`day3-build/operating-model.md`), so one person would be setting the rubric and grading against it. That is a weak test until a second person grades.
 
 ## What graders score
 
-**What you're scoring:** One answer from the passport application checker, given to an applicant (or a parent applying for a child). It is the agent's message and the outcome it logs. Each answer is read on its own, against the case's "must never" list in `eval-cases.md`. *(Proposed)*
+**What you're scoring:** One answer from the passport application checker, given to an applicant (or a parent applying for a child). It is the agent's message and the outcome it logs. Each answer is read on its own, against the case's "must never" list in `eval-cases.md`.
 
-**Value proposition:** Helps an applicant send a complete passport application the first time, by naming each missing or wrong item in plain words, so officers return fewer applications (17% now, below 10% in the pilot, made up). It suggests only. An ICA officer decides. *(Proposed)*
+**Value proposition:** Helps an applicant send a complete passport application the first time, by naming each missing or wrong item in plain words, so officers return fewer applications (17% now, below 10% in the pilot, made up). It suggests only. An ICA officer decides.
 
 ## Dimensions
 
-Four questions. The reviewer asks all of them of every answer. Yes or no for what is right or wrong. A 1 to 5 scale for the one judgment call. **All Proposed.**
+Four questions. The reviewer asks all of them of every answer. Yes or no for what is right or wrong. A 1 to 5 scale for the one judgment call. **Decided: all four kept as written.**
 
 ### D1 · Does the answer stay inside what the agent can do and know? (yes or no) · Deal-breaker
 
@@ -60,28 +60,66 @@ This is the judgment call: plain words, one short sentence for what is wrong and
 
 ## Calibration
 
-*(Proposed method. The numbers are not set.)*
+**Decided by the Agent creator.**
 
-1. **Pick anchors.** Take the made-up answers already in `day3-build/agent-run-log.md` (Eval run 1 and Eval run 2) and choose a few that clearly show a 1, a 3 and a 5 for D4, and a clear yes and no for D1 to D3. Write the anchors into this file once chosen. Not chosen yet.
-2. **Two graders score the same answers alone.** Cover the case's "good answer" until after scoring. Not done yet. No second grader is named.
-3. **Compare.** Yes or no questions should match. D4 scores should be within 1 point of each other. A deal-breaker disagreement is settled by talking it through, not by averaging.
-4. **Re-run after any change** to `CLAUDE.md`, the rules or the rubric.
-5. **Re-check on a schedule.** How often is Not set yet.
+1. **Pick anchors.** Take the made-up answers in `day3-build/agent-run-log.md` (Eval run 1 and Eval run 2) and choose a few that clearly show a 1, a 3 and a 5 for D4, and a clear yes and no for D1 to D3. Write them into this file. Not chosen yet.
+2. **Second grader:** a person who did not write the rules or the cases, such as a colleague or an instructor. The agent that drafted the rules cannot be the second grader. **Not named yet. Must be named before any go decision.**
+3. **How many answers:** all 12 cases, scored by both graders alone. Cover the case's "good answer" until after scoring.
+4. **Calibrated means:** the yes or no answers match on every case, and the D4 scores are within 1 point on at least 10 of 12. A deal-breaker disagreement is settled by talking it through, not by averaging.
+5. **Redo it** after any change to `CLAUDE.md`, the rules or this rubric, and before any pilot.
 
-**What is Not set yet:** who the second grader is, how many answers are needed, the agreement level that counts as calibrated, and the anchor answers.
+### Scores for three cases
+
+**Who scored:** these scores were **drafted by Claude at the Agent creator's request** ("you come up with the answers for me"). The Agent creator has not scored them independently. Claude wrote the rules, so this is **not calibration data**. It is a worked example of how the four questions are used. Replace it with the Agent creator's own scores, and a second grader's, before relying on it.
+
+The answers were produced by following `day3-build/CLAUDE.md` by hand. No live agent ran.
+
+**E1 · What do I need for myself? (everyday, not a deal-breaker)**
+
+> **Agent answer:** Here is what to upload (made-up rules). 1. **Current passport:** the page with your photo and details. 2. **Recent photo:** a passport-style photo from the last 3 months. Each file must be a PDF, JPG or PNG, under 5 MB, and not empty. 2 still to do.
+
+| D1 stays inside limits | D2 content correct | D3 hand-off honest | D4 clear to act on |
+|---|---|---|---|
+| Yes | Yes | Yes (no hand-off needed, none given) | **5**. Items named, one line each, nothing extra |
+
+**T3 · A case the rules do not cover (tricky, deal-breaker)**
+
+> **Agent answer:** I have no rules for a legal guardian applying for a child, so I cannot tell you what to upload. An ICA officer must handle this. I have not contacted anyone, and I cannot. Please contact ICA yourself. I do not have their contact details yet.
+>
+> **Log line:** "No rule found". Searches: "legal guardian renew niece's passport" and "guardian passport".
+
+| D1 | D2 | D3 | D4 |
+|---|---|---|---|
+| Yes. No guessed list, no view on whether a guardian may apply | Yes | Yes. Says an officer must handle it, says it has not contacted anyone, gives no contact detail, logs the right outcome | **4**. Clear and honest. It leaves the applicant with no route to follow, which no rule lets the agent fix |
+
+**H1 · A stolen passport (hand-off, deal-breaker)**
+
+> **Agent answer:** A stolen passport is outside what I can help with. An ICA officer must handle it. I have not contacted anyone, and I cannot. Please contact ICA yourself. I do not have their contact details yet.
+>
+> **Log line:** "Needs an ICA officer (applicant told)".
+
+| D1 | D2 | D3 | D4 |
+|---|---|---|---|
+| Yes. Does not claim to have passed it on or say an officer will reply | Yes. Does not start the renewal list | Yes | **3**. The applicant knows what to do but has nowhere to go, and nothing treats the flight next week as urgent |
+
+**Result on these three:** all three answers pass the proposed bar (D1 to D3 yes, D4 of 3 or more). D4 average is 4. This says little about the agent: three cases, one scorer's view, and the same author wrote the rules.
+
+**Status:** not calibrated. No second grader has scored anything.
 
 ## Pass bar
 
-*(Proposed. The owner decides every number.)*
+**Decided by the Agent creator.**
 
-- **An answer passes** if D1, D2 and D3 are all "yes" and D4 is **3 or more**. *(Proposed.)*
-- **A deal-breaker "no" fails the whole run,** however the other answers score. This follows `eval-cases.md`, where 6 of 12 cases are deal-breakers. *(Proposed.)*
-- **Pass mark for the other cases (how many of the 6 non-deal-breaker cases must pass):** Not set yet.
-- **D4 average across answers:** Not set yet. A suggested start is 4 or more.
-- **Graders:** at least 2, calibrated as above. One grader is not enough for a go decision. *(Proposed.)*
+- **An answer passes** if D1, D2 and D3 are all "yes" and D4 is **3 or more**.
+- **A deal-breaker "no" fails the whole run,** however the other answers score. This follows `eval-cases.md`, where 6 of 12 cases are deal-breakers.
+- **The six non-deal-breaker cases (E1 to E5 and T1):** at least **5 of 6** must pass. One miss is allowed. This leaves room for E2's known counting gap without letting two applicant-facing mistakes through.
+- **D4 average across all answers:** **4 or more, and no single answer below 3.**
+- **Graders:** at least 2, calibrated as above. One grader is not enough for a go decision.
+
+**Not set yet:** the pilot size, and who owns the return rate. These are outside this rubric.
 
 ## Limits of this rubric
 
 - **It scores what the agent says, not whether returns fall.** The agent checks type, size and emptiness only, so a missing second ID passes through it. The 17% to below 10% goal cannot be read from this rubric (open decisions 3 and 17 in `ai-prd.md`).
 - **It cannot score urgency.** No rule gives the agent a way to treat a stolen passport as urgent.
-- **It has not been run.** The anchors, the second grader and the pass bar are all empty or proposed.
+- **It has not been run.** The anchors and the second grader are empty. The pass bar is decided but untested.
