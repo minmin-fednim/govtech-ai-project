@@ -24,7 +24,7 @@ Open `day2-validate/prototype/index.html` in a browser. There is no build step a
 - Messages for an empty file, a wrong file type and a file over 5 MB.
 - A simulated upload with a forced failure ("page not found, error 404"). The row stays not done.
 - Pay stays locked until every row is done, and while a file is uploading. A payment timeout shows a retry button.
-- The status box shows "N still to do" or "Looks complete".
+- The status box shows "N still to do", or "File types and sizes look right. I have not checked what is inside the files."
 - The consent row can be skipped when both parents apply together.
 - A facilitator fix test counts first-try fixes against the 9 in 10 goal (made up).
 

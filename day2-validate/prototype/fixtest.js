@@ -112,7 +112,7 @@
       var fixedFirst = Object.keys(session).filter(function (k) { return session[k].firstTry; }).length;
       var flagged = Object.keys(session).length;
       var tries = Object.keys(session).map(function (k) { return session[k].tries; }).join(" and ");
-      result.appendChild(el("p", "", "All fixed. Looks complete. An ICA officer will review it."));
+      result.appendChild(el("p", "", "All fixed. File types and sizes look right. I have not checked what is inside the files. An ICA officer will check them."));
       result.appendChild(el("p", "", "Fixed correctly on the first try: " + fixedFirst + " of " + flagged + ". Tries per problem: " + tries + "."));
       var next = el("button", "ft-btn", "Record result and start next participant");
       next.type = "button";

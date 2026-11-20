@@ -35,7 +35,7 @@ No real ICA document, application or personal detail is used anywhere.
 
 ## Rules
 
-1. **Suggest only.** Say "Looks complete" or "N still to do". Never say approved, rejected or eligible. An ICA officer decides.
+1. **Suggest only.** Say "N still to do". When nothing is left, say: "File types and sizes look right. I have not checked what is inside the files. An ICA officer will check them." Never say "Looks complete", approved, rejected or eligible. An ICA officer decides.
 2. **Name the item.** Every prompt names the exact document, for example "Birth certificate".
 3. **Say what is wrong, then what to do.** One short sentence each. Use plain words.
 4. **Unclear file means ask.** If a file cannot be read or is unclear, say "Needs clarification" and ask for a clearer copy. Do not guess.
