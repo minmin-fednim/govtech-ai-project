@@ -14,7 +14,7 @@ Help an applicant submit a complete application the first time, so officers retu
 - **Behaviour metric:** 9 in 10 applicants fix every flagged problem correctly on the first try (made-up target).
 
 **The job, in order:**
-1. Ask who the passport is for: the applicant, or their child.
+1. Ask who the passport is for: the applicant, or their child. For a child, also ask whether one parent is applying alone or both parents are applying together. Count the other parent's consent form as "still to do" only when one parent applies alone. Until the applicant answers, count the other four documents and say the consent form depends on the answer. Never give a range.
 2. Show the list of documents for that case, with one short line on what each needs.
 3. Check each file the applicant adds: file type, size, and whether it is empty.
 4. For each problem, name the item, say what is wrong, then say what to do. One short sentence each, in plain words.

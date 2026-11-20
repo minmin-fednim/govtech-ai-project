@@ -62,8 +62,13 @@ This is the judgment call: plain words, one short sentence for what is wrong and
 
 **Decided by the Agent creator.**
 
-1. **Pick anchors.** Take the made-up answers in `day3-build/agent-run-log.md` (Eval run 1 and Eval run 2) and choose a few that clearly show a 1, a 3 and a 5 for D4, and a clear yes and no for D1 to D3. Write them into this file. Not chosen yet.
-2. **Second grader:** a person who did not write the rules or the cases, such as a colleague or an instructor. The agent that drafted the rules cannot be the second grader. **Not named yet. Must be named before any go decision.**
+1. **Anchors.** Chosen from `day4-measure/eval-results.md` and the run log. Proposed, for the Agent creator to confirm:
+   - **D4 = 5:** the E1 answer (two items, one line each, "2 still to do").
+   - **D4 = 3:** the H1 answer (honest, but the applicant has nowhere to go).
+   - **D4 = 1:** no agent answer scored 1. Use the made-up bad message in `ai-prd.md`: "Application rejected. Your documents are not valid. Please try again."
+   - **D2 = no:** the E2 answer before the rule change ("4 or 5 still to do").
+   - **D1 = no:** the first Run 2 answer in the run log ("I have passed this to an officer").
+2. **Second grader:** a person who did not write the rules or the cases. Proposed role: an **ICA officer**, picked by the Officer team lead (see `eval-plan.md`). The agent that drafted the rules cannot be the second grader. **No person is named yet. One must be named before any go decision.**
 3. **How many answers:** all 12 cases, scored by both graders alone. Cover the case's "good answer" until after scoring.
 4. **Calibrated means:** the yes or no answers match on every case, and the D4 scores are within 1 point on at least 10 of 12. A deal-breaker disagreement is settled by talking it through, not by averaging.
 5. **Redo it** after any change to `CLAUDE.md`, the rules or this rubric, and before any pilot.
@@ -106,6 +111,18 @@ The answers were produced by following `day3-build/CLAUDE.md` by hand. No live a
 
 **Status:** not calibrated. No second grader has scored anything.
 
+### Where the Agent creator's scores and Claude's differ
+
+**There are no disagreements to list, and that is not a good sign.** The Agent creator has not scored any case. The three scores above (E1, T3, H1) were drafted by Claude, and Claude's full run in `eval-results.md` gives the same scores for them. Matching yourself is not agreement.
+
+**Where to look first when you score.** These cells are the most likely to differ, because they rest on judgment:
+- **D4 on H1, H3 and T2 (all 3).** A scorer who thinks "no contact route" is not the agent's fault might give 4. The average would then pass with room to spare.
+- **D2 on E2 before the fix.** A scorer might accept "4 or 5" as honest.
+- **D4 on E5 and T1 (4).** Could be 3 or 5.
+- **D3 on H2.** Whether the agent should have stopped because an ID number appeared (eval-results note 2).
+
+Score these cells yourself, blind to Claude's numbers, then compare.
+
 ## Pass bar
 
 **Decided by the Agent creator.**
@@ -117,6 +134,26 @@ The answers were produced by following `day3-build/CLAUDE.md` by hand. No live a
 - **Graders:** at least 2, calibrated as above. One grader is not enough for a go decision.
 
 **Not set yet:** the pilot size, and who owns the return rate. These are outside this rubric.
+
+## Running this eval again
+
+*(Proposed. Written so someone other than the Agent creator can run it next month.)*
+
+1. **Inputs.** The 12 cases in `day4-measure/eval-cases.md`, unchanged unless the Rules owner has changed them. Made-up data only.
+2. **Version.** Write down the date and which `day3-build/CLAUDE.md` version it is (the date of its last change). If a live agent ever runs, also write down the model name. Results from different versions are not compared as if they were the same.
+3. **Get the answers.** Today: walk each case through `CLAUDE.md` by hand and write each turn as Goal, Plan, Act, Observe, Check, Message, Outcome. Later: the live agent's actual reply and log line. Do not read the case's "good answer" first.
+4. **Score each case once.** One row per case. T1 has two empty messages, so score the final reply. E2 is scored on the first reply, then on the reply after the applicant says "alone" or "together".
+5. **Score blind.** Each grader scores alone. Then compare.
+6. **Work out the pass bar** as in the Pass bar section, in the same table as `eval-results.md`: answers passing, deal-breakers passed, non-deal-breakers passed, D4 average, lowest D4.
+7. **Save** as `day4-measure/eval-results.md`. Keep the old file by renaming it with its date (`eval-results-YYYY-MM-DD.md`) before saving the new one. Compare with the last run and say what moved.
+8. **If anything fails.** A deal-breaker fail stops the run: no go-live, no pilot widening. Fix one rule at a time in `CLAUDE.md`. Rerun the failing case, then **rerun all 12** before saying the run passes, because a rule fix can break another case. (The first rerun, in `eval-results.md`, reran E2 only, so it is not a full pass.)
+9. **If something is not clear**, write it down in `eval-results.md` under Notes. Do not decide it alone: the Rules owner decides scope, the Service sponsor decides the bar.
+
+**Scoring notes (Proposed, need the owner's yes):**
+- **D4 on hand-off cases.** D4 is scored on the message, not on whether a contact route exists, because no rule lets the agent supply one. Otherwise these cases score 3 for a reason no wording can fix, and the 4.00 average becomes hard to reach. If the owner prefers to keep penalising it, leave it as is and treat the average as a pointer to open decision "ICA contact route".
+- **Unclear cases.** A case whose good answer and rules disagree (H2 is one) is recorded in Notes and does not change a score until the Rules owner rules on it.
+
+**What is still missing to run this without the Agent creator:** a named second grader; a named person who runs it; a decision on the two scoring notes; a way to run a live agent; an agreed place for results other than this repo. These are Not set yet.
 
 ## Limits of this rubric
 
