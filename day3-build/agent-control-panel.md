@@ -76,7 +76,8 @@ The agent cannot contact anyone. It tells the applicant that an ICA officer must
 - Nobody is named to own the rules or the return rate.
 - How often a human reviews the log is not set. The log is the only record when a case needs an officer, so until someone reads it, those cases reach nobody.
 - Nobody is named for the roles in `day3-build/operating-model.md`. It is a proposal.
-- Open decisions in `day3-build/ai-prd.md` (16) are not closed, including whether the agent may read file contents. Without it the agent cannot tell a hospital note from a birth certificate.
+- Open decisions in `day3-build/ai-prd.md` (17) are not closed, including whether the agent may read file contents. Without it the agent cannot tell a hospital note from a birth certificate.
+- **A setting the business owner would not sign: Permission 6 (auto), "Looks complete".** The agent checks only file type, size and whether a file is empty, so "Looks complete" is a claim nobody checked. This is open decision 17 in `ai-prd.md`. Do not sign this page as if that setting were agreed.
 
 ## Sign-off
 
